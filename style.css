@@ -8,7 +8,7 @@ html {
 }
 
 html {
-  font-size: 62.5%;
+  /* font-size: 62.5%; */
   font-family: "Lato", sans-serif;
   background-color: rgb(31, 31, 31);
   color: aliceblue;
@@ -64,10 +64,13 @@ body {
   padding: 0 0.125em;
 }
 
-/* .form-alert {
+.form-alert {
   visibility: hidden;
-} */
-
-.form__input:focus ~ .form-alert {
-  visibility: visible;
+  height: 0;
+  display: flex;
+  flex-direction: column;
 }
+
+/* .form__element ~ .form__input:focus > .form-alert {
+  visibility: visible;
+} */

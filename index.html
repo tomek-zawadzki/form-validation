@@ -19,51 +19,71 @@
     <main>
       <h1>Form Validation</h1>
       <form class="form">
-        <div class="form__element">
-          <input class="form__input" id="name" type="text" placeholder=" " />
-          <label class="form__label" for="name"> Name </label>
-          <p class="form-alert">Must consist of at least 2 signs</p>
-          <!-- <p class="form-alert">
-            Must not contain numbers and special characters
-          </p> -->
+        <div class="element__box">
+          <div class="form__element">
+            <input class="form__input" id="name" type="text" placeholder=" " />
+            <label class="form__label" for="name"> Name </label>
+          </div>
+          <p class="form-alert">
+            <span>at least 2 signs</span>
+            <span>not numbers and special characters</span>
+          </p>
         </div>
-        <!-- <div class="form__element">
-          <input class="form__input" id="email" type="email" placeholder=" " />
-          <label class="form__label" for="email"> Email </label>
+        <div class="element__box">
+          <div class="form__element">
+            <input
+              class="form__input"
+              id="email"
+              type="email"
+              placeholder=" "
+            />
+            <label class="form__label" for="email"> Email </label>
+          </div>
           <p class="form-alert">must contain @ and domain</p>
         </div>
-        <div class="form__element">
-          <input
-            class="form__input"
-            id="password"
-            type="password"
-            placeholder=" "
-          />
-          <label class="form__label" for="password"> Password </label>
-          <p class="form-alert">Must contain at least 8 characters</p>
-          <p class="form-alert">Must contain one uppercase character</p>
-          <p class="form-alert">Must contain at least one digit</p>
-          <p class="form-alert">Must contain at least one special character</p>
-        </div>
-        <div class="form__element">
-          <input
-            class="form__input"
-            id="confirm-password"
-            type="password"
-            placeholder=" "
-          />
-          <label class="form__label" for="confirm-password">
-            Confirm password
-          </label>
-          <p class="form-alert">Must be the same like password</p>
-        </div>
-        <div class="form__element">
-          <input class="form__input" id="rodo" type="checkbox" />
-          <label class="form__label" for="rodo"> Accept RODO </label>
-          <p class="form-alert">RODO must be accepted</p>
-        </div> -->
 
-        <!-- <button class="submit-btn">Send</button> -->
+        <div class="element-box">
+          <div class="form__element">
+            <input
+              class="form__input"
+              id="password"
+              type="password"
+              placeholder=" "
+            />
+            <label class="form__label" for="password"> Password </label>
+          </div>
+          <p class="form-alert">
+            <span>at least 8 characters</span
+            ><span>at least one uppercase character</span
+            ><span>at least one digit</span
+            ><span>at least one special character</span>
+          </p>
+        </div>
+
+        <div class="element__box">
+          <div class="form__element">
+            <input
+              class="form__input"
+              id="confirm-password"
+              type="password"
+              placeholder=" "
+            />
+            <label class="form__label" for="confirm-password">
+              Confirm password
+            </label>
+          </div>
+          <p class="form-alert"><span>Must be the same like password</span></p>
+        </div>
+
+        <div class="element__box">
+          <div class="form__element">
+            <input class="form__input" id="rodo" type="checkbox" />
+            <label class="form__label" for="rodo"> Accept RODO </label>
+          </div>
+          <p class="form-alert"><span>RODO must be accepted</span></p>
+        </div>
+
+        <button class="submit-btn">Send</button>
       </form>
     </main>
 
