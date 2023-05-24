@@ -29,6 +29,15 @@ body {
   position: relative;
 }
 
+.form__element--checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.input-checkbox {
+  margin-right: 2rem;
+}
+
 .form__input {
   position: absolute;
   height: 100%;
@@ -38,11 +47,12 @@ body {
   border-radius: 0.5em;
   outline: none;
   padding-left: 1em;
+  color: aliceblue;
 }
 
 .form__label {
   position: absolute;
-  background-color: #121212;
+  background-color: rgb(31, 31, 31);
   left: 1em;
   top: 0.75em;
   cursor: text;
@@ -65,12 +75,28 @@ body {
 }
 
 .form-alert {
-  visibility: hidden;
+  opacity: 0;
   height: 0;
   display: flex;
   flex-direction: column;
+  color: tomato;
+  font-size: 0.8rem;
+  transition: opacity 0.4s, height 0.4s;
 }
 
-/* .form__element ~ .form__input:focus > .form-alert {
-  visibility: visible;
-} */
+.submit-btn {
+  width: 90%;
+  background-color: #00ffff;
+  border: none;
+  border-radius: 0.2rem;
+  height: 1.6rem;
+  transition: background-color 0.35s;
+}
+
+.submit-btn:hover {
+  background-color: #00aeff;
+}
+
+.submit-btn:active {
+  background-color: rgb(186, 240, 255);
+}
