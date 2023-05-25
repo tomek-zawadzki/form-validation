@@ -84,6 +84,10 @@ body {
   transition: opacity 0.4s, height 0.4s;
 }
 
+.form-alert-correct {
+  color: yellowgreen;
+}
+
 .submit-btn {
   width: 90%;
   background-color: #00ffff;

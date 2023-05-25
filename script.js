@@ -3,45 +3,87 @@ const nameInput = document.querySelector(".input-name");
 const emailInput = document.querySelector(".input-email");
 const passwordInput = document.querySelector(".input-password");
 const confirmPasswordInput = document.querySelector(".input-confirm-password");
+const alertNameBox = document.querySelector(".form-alert-name");
+const alertEmailBox = document.querySelector(".form-alert-email");
+const alertPasswordBox = document.querySelector(".form-alert-password");
+const alertConfirmPasswordBox = document.querySelector(
+  ".form-alert-confirm-password"
+);
 const formAlerts = document.querySelectorAll(".form-alert");
 const submitBtn = document.querySelector(".submit-btn");
 const elementBox = document.querySelectorAll(".element__box");
-
 let passwordValue;
 
 const inputErrors = {
-  name: {
-    errorOne: "at least 2 signs",
-    errorTwo: "not numbers and special characters",
-  },
+  name: [
+    {
+      text: "at least 2 signs",
+      validator: () => nameInput.value.length >= 2,
+      id: 0,
+    },
+    {
+      text: "not numbers and special characters",
+      validator: () =>
+        !nameInput.value.match(/[0-9`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/),
+      id: 1,
+    },
+  ],
+  email: [
+    {
+      text: "must contain @ and domainat least 2 signs",
+      validator: () =>
+        emailInput.value.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g),
+      id: 2,
+    },
+  ],
+  password: [
+    {
+      text: "at least 8 characters",
+      validator: () => passwordInput.value.length >= 8,
+      id: 3,
+    },
+    {
+      text: "at least one uppercased character",
+      validator: () => passwordInput.value.match(/[A-Z]/),
+      id: 4,
+    },
+    {
+      text: "at least one digit",
+      validator: () => passwordInput.value.match(/[0-9]/),
+      id: 5,
+    },
+    {
+      text: "at least one special character",
+      validator: () =>
+        passwordInput.value.match(/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/),
+      id: 6,
+    },
+  ],
+  confirmPassword: [
+    {
+      text: "must be the same like password",
+      validator: () =>
+        confirmPasswordInput.value === passwordInput.value &&
+        passwordInput.value !== "",
+      id: 7,
+    },
+  ],
 
-  email: {
-    errorOne: "must contain @ and domainat least 2 signs",
-  },
-
-  password: {
-    errorOne: "at least 2 signs",
-    errorTwo: "at least 8 characters",
-    errorThree: "at least one digit",
-    errorFour: "at least one special character",
-  },
-
-  confirmPassword: {
-    errorOne: "must be the same like password",
-  },
-
-  rodo: {
-    errorOne: "RODO must be accepted",
-  },
+  rodo: [
+    {
+      text: "RODO must be accepted",
+      validator: () => "must be checked",
+      id: 8,
+    },
+  ],
 };
-
 const createErrorMsg = (element, formAlerts) => {
-  for (const [key, value] of Object.entries(element)) {
+  element.forEach((el) => {
     const errorMsg = document.createElement("span");
-    errorMsg.textContent = value;
-    console.log(errorMsg.textContent);
+    errorMsg.classList.add("error-msg");
+    errorMsg.textContent = el.text;
     formAlerts.appendChild(errorMsg);
-  }
+  });
 };
 
 formInputs.forEach((input, i) => {
@@ -61,80 +103,42 @@ formInputs.forEach((input, i) => {
   });
 });
 
-let isFirstKeyup = true;
+function validateInput(element, validator) {
+  if (validator) {
+    element.classList.toggle("form-alert-correct");
+  }
+  // } else {
+  //   if (element.classList.contains("form-alert-correct")) {
+  //     element.classList.remove("form-alert-correct");
+  //   }
+  // }
+}
+
+createErrorMsg(inputErrors.name, alertNameBox);
+createErrorMsg(inputErrors.email, alertEmailBox);
+createErrorMsg(inputErrors.password, alertPasswordBox);
+createErrorMsg(inputErrors.confirmPassword, alertConfirmPasswordBox);
+
+const errorMsgs = document.querySelectorAll(".error-msg");
 
 nameInput.addEventListener("keyup", () => {
-  if (isFirstKeyup) {
-    createErrorMsg(inputErrors.name, formAlerts[0]);
-    isFirstKeyup = false;
-  }
-
-  if (nameInput.value.length >= 2) {
-    formAlerts[0].firstElementChild.style.color = "greenyellow";
-  } else {
-    formAlerts[0].firstElementChild.style.color = "tomato";
-  }
-  if (nameInput.value.includes("@")) {
-    formAlerts[0].lastElementChild.style.color = "tomato";
-  } else {
-    formAlerts[0].lastElementChild.style.color = "greenyellow";
-  }
+  validateInput(errorMsgs[0], inputErrors.name[0].validator());
+  validateInput(errorMsgs[1], inputErrors.name[1].validator());
 });
 
 emailInput.addEventListener("keyup", () => {
-  if (isFirstKeyup) {
-    createErrorMsg(inputErrors.email, formAlerts[1]);
-    isFirstKeyup = false;
-  }
-  if (emailInput.value.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g)) {
-    formAlerts[1].style.color = "greenyellow";
-  } else {
-    formAlerts[1].style.color = "tomato";
-  }
+  validateInput(errorMsgs[2], inputErrors.email[0].validator());
 });
 
 passwordInput.addEventListener("keyup", () => {
-  if (isFirstKeyup) {
-    createErrorMsg(inputErrors.password, formAlerts[2]);
-    isFirstKeyup = false;
-  }
-  if (passwordInput.value.length >= 8) {
-    formAlerts[2].firstElementChild.style.color = "greenyellow";
-  } else {
-    formAlerts[2].firstElementChild.style.color = "tomato";
-  }
-  if (passwordInput.value.match(/[A-Z]/)) {
-    formAlerts[2].firstElementChild.nextElementSibling.style.color =
-      "greenyellow";
-  } else {
-    formAlerts[2].firstElementChild.nextElementSibling.style.color = "tomato";
-  }
-  if (passwordInput.value.match(/[0-9]/)) {
-    formAlerts[2].lastElementChild.previousElementSibling.style.color =
-      "greenyellow";
-  } else {
-    formAlerts[2].lastElementChild.previousElementSibling.style.color =
-      "tomato";
-  }
-  if (passwordInput.value.match(/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/)) {
-    formAlerts[2].lastElementChild.style.color = "greenyellow";
-  } else {
-    formAlerts[2].lastElementChild.style.color = "tomato";
-  }
+  validateInput(errorMsgs[3], inputErrors.password[0].validator());
+  validateInput(errorMsgs[4], inputErrors.password[1].validator());
+  validateInput(errorMsgs[5], inputErrors.password[2].validator());
+  validateInput(errorMsgs[6], inputErrors.password[3].validator());
+
   return passwordInput.value;
 });
 
 confirmPasswordInput.addEventListener("keyup", () => {
-  if (isFirstKeyup) {
-    createErrorMsg(inputErrors.confirmPassword, formAlerts[3]);
-    isFirstKeyup = false;
-  }
-  if (
-    confirmPasswordInput.value === passwordInput.value &&
-    passwordInput.value !== ""
-  ) {
-    formAlerts[3].style.color = "greenyellow";
-  } else {
-    formAlerts[3].style.color = "tomato";
-  }
+  validateInput(errorMsgs[7], inputErrors.confirmPassword[0].validator());
 });
