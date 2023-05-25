@@ -105,13 +105,12 @@ formInputs.forEach((input, i) => {
 
 function validateInput(element, validator) {
   if (validator) {
-    element.classList.toggle("form-alert-correct");
+    element.classList.add("form-alert-correct");
+  } else {
+    if (element.classList.contains("form-alert-correct")) {
+      element.classList.remove("form-alert-correct");
+    }
   }
-  // } else {
-  //   if (element.classList.contains("form-alert-correct")) {
-  //     element.classList.remove("form-alert-correct");
-  //   }
-  // }
 }
 
 createErrorMsg(inputErrors.name, alertNameBox);
