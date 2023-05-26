@@ -3,16 +3,18 @@ const nameInput = document.querySelector(".input-name");
 const emailInput = document.querySelector(".input-email");
 const passwordInput = document.querySelector(".input-password");
 const confirmPasswordInput = document.querySelector(".input-confirm-password");
+const rodoInput = document.querySelector(".input-rodo");
 const alertNameBox = document.querySelector(".form-alert-name");
 const alertEmailBox = document.querySelector(".form-alert-email");
 const alertPasswordBox = document.querySelector(".form-alert-password");
 const alertConfirmPasswordBox = document.querySelector(
   ".form-alert-confirm-password"
 );
+const alertRodoBox = document.querySelector(".form-alert-rodo");
 const formAlerts = document.querySelectorAll(".form-alert");
 const submitBtn = document.querySelector(".submit-btn");
 const elementBox = document.querySelectorAll(".element__box");
-let passwordValue;
+// let passwordValue;
 
 const inputErrors = {
   name: [
@@ -77,12 +79,12 @@ const inputErrors = {
     },
   ],
 };
-const createErrorMsg = (element, formAlerts) => {
+const createErrorMsg = (element, boxToPushMsg) => {
   element.forEach((el) => {
     const errorMsg = document.createElement("span");
     errorMsg.classList.add("error-msg");
     errorMsg.textContent = el.text;
-    formAlerts.appendChild(errorMsg);
+    boxToPushMsg.appendChild(errorMsg);
   });
 };
 
@@ -117,6 +119,7 @@ createErrorMsg(inputErrors.name, alertNameBox);
 createErrorMsg(inputErrors.email, alertEmailBox);
 createErrorMsg(inputErrors.password, alertPasswordBox);
 createErrorMsg(inputErrors.confirmPassword, alertConfirmPasswordBox);
+createErrorMsg(inputErrors.rodo, alertRodoBox);
 
 const errorMsgs = document.querySelectorAll(".error-msg");
 
@@ -141,3 +144,21 @@ passwordInput.addEventListener("keyup", () => {
 confirmPasswordInput.addEventListener("keyup", () => {
   validateInput(errorMsgs[7], inputErrors.confirmPassword[0].validator());
 });
+
+const validateRodo = () => {
+  if (rodoInput === document.activeElement) {
+    alertRodoBox.style.opacity = 1;
+  } else if (rodoInput !== document.activeElement) {
+    alertRodoBox.style.opacity = 0;
+  }
+
+  if (rodoInput.checked) {
+    alertRodoBox.classList.add("form-alert-correct");
+  } else if (!rodoInput.checked) {
+    if (alertRodoBox.classList.contains("form-alert-correct")) {
+      alertRodoBox.classList.remove("form-alert-correct");
+    }
+  }
+};
+
+rodoInput.addEventListener("click", validateRodo);
