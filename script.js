@@ -14,7 +14,6 @@ const alertRodoBox = document.querySelector(".form-alert-rodo");
 const formAlerts = document.querySelectorAll(".form-alert");
 const submitBtn = document.querySelector(".submit-btn");
 const elementBox = document.querySelectorAll(".element__box");
-// let passwordValue;
 
 const inputErrors = {
   name: [
@@ -123,26 +122,16 @@ createErrorMsg(inputErrors.rodo, alertRodoBox);
 
 const errorMsgs = document.querySelectorAll(".error-msg");
 
-nameInput.addEventListener("keyup", () => {
-  validateInput(errorMsgs[0], inputErrors.name[0].validator());
-  validateInput(errorMsgs[1], inputErrors.name[1].validator());
-});
+const inputs = [nameInput, emailInput, passwordInput, confirmPasswordInput];
 
-emailInput.addEventListener("keyup", () => {
-  validateInput(errorMsgs[2], inputErrors.email[0].validator());
-});
-
-passwordInput.addEventListener("keyup", () => {
-  validateInput(errorMsgs[3], inputErrors.password[0].validator());
-  validateInput(errorMsgs[4], inputErrors.password[1].validator());
-  validateInput(errorMsgs[5], inputErrors.password[2].validator());
-  validateInput(errorMsgs[6], inputErrors.password[3].validator());
-
-  return passwordInput.value;
-});
-
-confirmPasswordInput.addEventListener("keyup", () => {
-  validateInput(errorMsgs[7], inputErrors.confirmPassword[0].validator());
+inputs.forEach((input) => {
+  input.addEventListener("keyup", () => {
+    for (const field in inputErrors) {
+      inputErrors[field].forEach((error) => {
+        validateInput(errorMsgs[error.id], error.validator());
+      });
+    }
+  });
 });
 
 const validateRodo = () => {
@@ -153,12 +142,32 @@ const validateRodo = () => {
   }
 
   if (rodoInput.checked) {
-    alertRodoBox.classList.add("form-alert-correct");
+    alertRodoBox.firstElementChild.classList.add("form-alert-correct");
   } else if (!rodoInput.checked) {
-    if (alertRodoBox.classList.contains("form-alert-correct")) {
-      alertRodoBox.classList.remove("form-alert-correct");
+    if (
+      alertRodoBox.firstElementChild.classList.contains("form-alert-correct")
+    ) {
+      alertRodoBox.firstElementChild.classList.remove("form-alert-correct");
     }
   }
 };
 
 rodoInput.addEventListener("click", validateRodo);
+
+const checkFormIsValid = (e) => {
+  e.preventDefault();
+
+  const result = [...errorMsgs].every((alert) =>
+    alert.classList.contains("form-alert-correct")
+  );
+
+  [...errorMsgs].forEach((msg) => {
+    if (!msg.classList.contains("form-alert-correct")) {
+      msg.parentElement.style.opacity = 1;
+    }
+  });
+
+  return result;
+};
+
+submitBtn.addEventListener("click", checkFormIsValid);

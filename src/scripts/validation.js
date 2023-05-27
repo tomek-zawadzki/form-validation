@@ -174,3 +174,25 @@ function handleRodoInput() {
 
 form.rodoInput.addEventListener("focus", handleRodoInput);
 form.rodoInput.addEventListener("change", handleRodoInput);
+
+// nameInput.addEventListener("keyup", () => {
+//   validateInput(errorMsgs[0], inputErrors.name[0].validator());
+//   validateInput(errorMsgs[1], inputErrors.name[1].validator());
+// });
+
+// emailInput.addEventListener("keyup", () => {
+//   validateInput(errorMsgs[2], inputErrors.email[0].validator());
+// });
+
+// passwordInput.addEventListener("keyup", () => {
+//   validateInput(errorMsgs[3], inputErrors.password[0].validator());
+//   validateInput(errorMsgs[4], inputErrors.password[1].validator());
+//   validateInput(errorMsgs[5], inputErrors.password[2].validator());
+//   validateInput(errorMsgs[6], inputErrors.password[3].validator());
+
+//   return passwordInput.value;
+// });
+
+// confirmPasswordInput.addEventListener("keyup", () => {
+//   validateInput(errorMsgs[7], inputErrors.confirmPassword[0].validator());
+// });
