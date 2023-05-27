@@ -15,8 +15,6 @@ const formAlerts = document.querySelectorAll(".form-alert");
 const sendBtn = document.querySelector(".submit-btn");
 const elementBox = document.querySelectorAll(".element__box");
 
-console.log(formInputs);
-
 const inputErrors = {
   name: [
     {
@@ -75,7 +73,6 @@ const inputErrors = {
   rodo: [
     {
       text: "RODO must be accepted",
-      // validator: () => "must be checked",
       id: 8,
     },
   ],
@@ -90,16 +87,12 @@ const createErrorMsg = (element, boxToPushMsg) => {
 };
 
 formInputs.forEach((input, i) => {
-  input.addEventListener("focus", () => {
-    formAlerts[i].style.opacity = "1";
-    formAlerts[i].style.height = "fit-content";
-  });
-});
-formInputs.forEach((input, i) => {
-  input.addEventListener("blur", () => {
-    formAlerts[i].style.opacity = "0";
-    formAlerts[i].style.height = "0";
-  });
+  const eventHandler = (opacity, height) => {
+    formAlerts[i].style.opacity = opacity;
+    formAlerts[i].style.height = height;
+  };
+  input.addEventListener("focus", () => eventHandler("1", "2rem"));
+  input.addEventListener("blur", () => eventHandler("0", "0"));
 });
 
 function validateInput(element, validator) {
