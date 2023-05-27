@@ -12,7 +12,7 @@ const alertConfirmPasswordBox = document.querySelector(
 );
 const alertRodoBox = document.querySelector(".form-alert-rodo");
 const formAlerts = document.querySelectorAll(".form-alert");
-const submitBtn = document.querySelector(".submit-btn");
+const sendBtn = document.querySelector(".submit-btn");
 const elementBox = document.querySelectorAll(".element__box");
 
 const inputErrors = {
@@ -135,24 +135,19 @@ inputs.forEach((input) => {
 });
 
 const validateRodo = () => {
-  if (rodoInput === document.activeElement) {
-    alertRodoBox.style.opacity = 1;
-  } else if (rodoInput !== document.activeElement) {
-    alertRodoBox.style.opacity = 0;
-  }
+  alertRodoBox.style.opacity = rodoInput === document.activeElement ? "1" : "0";
+  alertRodoBox.style.height =
+    rodoInput === document.activeElement ? "2rem" : "0rem";
 
-  if (rodoInput.checked) {
-    alertRodoBox.firstElementChild.classList.add("form-alert-correct");
-  } else if (!rodoInput.checked) {
-    if (
-      alertRodoBox.firstElementChild.classList.contains("form-alert-correct")
-    ) {
-      alertRodoBox.firstElementChild.classList.remove("form-alert-correct");
-    }
-  }
+  alertRodoBox.firstElementChild.classList.toggle(
+    "form-alert-correct",
+    rodoInput.checked
+  );
 };
 
-rodoInput.addEventListener("click", validateRodo);
+rodoInput.addEventListener("change", validateRodo);
+rodoInput.addEventListener("focus", validateRodo);
+rodoInput.addEventListener("blur", validateRodo);
 
 const checkFormIsValid = (e) => {
   e.preventDefault();
@@ -170,4 +165,4 @@ const checkFormIsValid = (e) => {
   return result;
 };
 
-submitBtn.addEventListener("click", checkFormIsValid);
+sendBtn.addEventListener("click", checkFormIsValid);
