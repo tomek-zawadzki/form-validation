@@ -81,8 +81,23 @@ body {
   justify-content: space-evenly;
 }
 
+.form-alert-rodo {
+  color: tomato;
+}
+
 .form-alert-correct {
-  color: yellowgreen;
+  color: greenyellow;
+}
+
+.input-rodo {
+  position: unset;
+  width: 1rem;
+}
+.label-checkbox {
+  font-size: 1rem !important;
+}
+#rodo {
+  font-size: 1rem;
 }
 
 .submit-btn {

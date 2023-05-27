@@ -15,6 +15,8 @@ const formAlerts = document.querySelectorAll(".form-alert");
 const sendBtn = document.querySelector(".submit-btn");
 const elementBox = document.querySelectorAll(".element__box");
 
+console.log(formInputs);
+
 const inputErrors = {
   name: [
     {
@@ -31,7 +33,7 @@ const inputErrors = {
   ],
   email: [
     {
-      text: "must contain @ and domainat least 2 signs",
+      text: "must contain @ and domainat",
       validator: () =>
         emailInput.value.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g),
       id: 2,
@@ -73,7 +75,7 @@ const inputErrors = {
   rodo: [
     {
       text: "RODO must be accepted",
-      validator: () => "must be checked",
+      // validator: () => "must be checked",
       id: 8,
     },
   ],
@@ -90,11 +92,7 @@ const createErrorMsg = (element, boxToPushMsg) => {
 formInputs.forEach((input, i) => {
   input.addEventListener("focus", () => {
     formAlerts[i].style.opacity = "1";
-    if (formAlerts[i] === formAlerts[2]) {
-      formAlerts[i].style.height = "4rem";
-    } else {
-      formAlerts[i].style.height = "2rem";
-    }
+    formAlerts[i].style.height = "fit-content";
   });
 });
 formInputs.forEach((input, i) => {
@@ -128,6 +126,7 @@ inputs.forEach((input) => {
   input.addEventListener("keyup", () => {
     for (const field in inputErrors) {
       inputErrors[field].forEach((error) => {
+        if (!error.validator) return;
         validateInput(errorMsgs[error.id], error.validator());
       });
     }
@@ -135,10 +134,6 @@ inputs.forEach((input) => {
 });
 
 const validateRodo = () => {
-  alertRodoBox.style.opacity = rodoInput === document.activeElement ? "1" : "0";
-  alertRodoBox.style.height =
-    rodoInput === document.activeElement ? "2rem" : "0rem";
-
   alertRodoBox.firstElementChild.classList.toggle(
     "form-alert-correct",
     rodoInput.checked
@@ -146,8 +141,6 @@ const validateRodo = () => {
 };
 
 rodoInput.addEventListener("change", validateRodo);
-rodoInput.addEventListener("focus", validateRodo);
-rodoInput.addEventListener("blur", validateRodo);
 
 const checkFormIsValid = (e) => {
   e.preventDefault();
@@ -159,6 +152,7 @@ const checkFormIsValid = (e) => {
   [...errorMsgs].forEach((msg) => {
     if (!msg.classList.contains("form-alert-correct")) {
       msg.parentElement.style.opacity = 1;
+      msg.parentElement.style.height = "fit-content";
     }
   });
 

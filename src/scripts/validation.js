@@ -79,7 +79,6 @@ const inputErrors = {
   rodo: [
     {
       text: "RODO must be accepted",
-      validator: () => "must be checked",
       id: 8,
     },
   ],
