@@ -23,7 +23,7 @@ const inputErrors = {
       id: 0,
     },
     {
-      text: "not numbers and special characters",
+      text: "without numbers and special characters",
       validator: () =>
         !nameInput.value.match(/[0-9`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/),
       id: 1,
@@ -86,12 +86,22 @@ const createErrorMsg = (element, boxToPushMsg) => {
   });
 };
 
+Object.keys(inputErrors).forEach((key) => {
+  inputErrors[key].forEach((el) => {
+    const errorMsg = document.createElement("span");
+    errorMsg.classList.add("error-msg");
+    errorMsg.textContent = el.text;
+    // console.log(errorMsg.textContent);
+  });
+});
+// console.log(Object.entries(inputErrors));
+
 formInputs.forEach((input, i) => {
   const eventHandler = (opacity, height) => {
     formAlerts[i].style.opacity = opacity;
     formAlerts[i].style.height = height;
   };
-  input.addEventListener("focus", () => eventHandler("1", "2rem"));
+  input.addEventListener("focus", () => eventHandler("1", "fit-content"));
   input.addEventListener("blur", () => eventHandler("0", "0"));
 });
 
@@ -149,7 +159,23 @@ const checkFormIsValid = (e) => {
     }
   });
 
-  return result;
+  if (result) {
+    sendData();
+  } else {
+    console.log("blablabal");
+  }
+};
+
+const sendData = () => {
+  const form = document.querySelector(".form");
+  const formData = new FormData(form);
+  fetch("https://przeprogramowani.pl/projekt-walidacja", {
+    method: "POST",
+    body: formData,
+  })
+    .then((resp) => resp.json())
+    .then((result) => console.log(result))
+    .catch((error) => console.log("error", error));
 };
 
 sendBtn.addEventListener("click", checkFormIsValid);

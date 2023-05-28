@@ -18,13 +18,14 @@
   <body>
     <main>
       <h1>Form Validation</h1>
-      <form class="form">
+      <form class="form" id="form">
         <div class="element__box">
           <div class="form__element">
             <input
               class="form__input input-name"
               id="name"
               type="text"
+              name="name"
               placeholder=" "
             />
             <label class="form__label" for="name"> Name </label>
@@ -38,6 +39,7 @@
               class="form__input input-email"
               id="email"
               type="email"
+              name="email"
               placeholder=" "
             />
             <label class="form__label" for="email"> Email </label>
@@ -51,6 +53,7 @@
               class="form__input input-password"
               id="password"
               type="password"
+              name="password"
               placeholder=" "
             />
             <label class="form__label" for="password"> Password </label>
@@ -64,6 +67,7 @@
               class="form__input input-confirm-password"
               id="confirm-password"
               type="password"
+              name="confirmPassword"
               placeholder=" "
             />
             <label class="form__label" for="confirm-password">
@@ -75,7 +79,12 @@
 
         <div class="element__box">
           <div class="form__element form__element--rodo">
-            <input class="form__input input-rodo" id="rodo" type="checkbox" />
+            <input
+              class="form__input input-rodo"
+              id="rodo"
+              type="checkbox"
+              name="rodo"
+            />
             <label class="label-checkbox" for="rodo"> Accept RODO </label>
           </div>
           <p class="form-alert form-alert-rodo"></p>
