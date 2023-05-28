@@ -22,7 +22,7 @@ body {
 }
 
 .form__element {
-  width: 90%;
+  width: 100%%;
   max-width: 20em;
   height: 2.5em;
   position: relative;
@@ -38,7 +38,6 @@ body {
   outline: none;
   padding-left: 1em;
   color: aliceblue;
-  z-index: 1;
 }
 
 .form__label {
@@ -101,10 +100,14 @@ body {
 }
 
 .error-msg {
-  z-index: 99;
 }
+
+.sending-info {
+  text-align: center;
+}
+
 .submit-btn {
-  width: 90%;
+  width: 100%;
   background-color: #00ffff;
   border: none;
   border-radius: 0.2rem;

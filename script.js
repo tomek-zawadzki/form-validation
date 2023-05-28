@@ -14,6 +14,7 @@ const alertFieldBoxes = {
 };
 const allFormInputs = document.querySelectorAll(".form__input");
 const allFormAlerts = document.querySelectorAll(".form-alert");
+const sendingInfo = document.querySelector(".sending-info");
 const sendBtn = document.querySelector(".submit-btn");
 
 const errorConditions = {
@@ -149,9 +150,10 @@ const checkFormIsValid = (e) => {
   });
 
   if (result) {
+    sendingInfo.textContent = "Success";
     sendData();
   } else {
-    console.log("form is not valid");
+    sendingInfo.textContent = "All fields must be correct";
   }
 };
 
@@ -164,7 +166,10 @@ const sendData = () => {
   })
     .then((resp) => resp.json())
     .then((result) => console.log(result))
-    .catch((error) => console.log("error", error));
+    .catch((error) => {
+      console.log("error", error);
+      sendingInfo.textContent = "Something went wrong. Try again.";
+    });
 };
 
 sendBtn.addEventListener("click", checkFormIsValid);
