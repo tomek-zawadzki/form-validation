@@ -22,7 +22,7 @@ body {
 }
 
 .form__element {
-  width: 100%%;
+  width: 100%;
   max-width: 20em;
   height: 2.5em;
   position: relative;
@@ -46,7 +46,7 @@ body {
   left: 1em;
   top: 0.75em;
   cursor: text;
-  transition: top 350ms ease-in, font-size 350ms ease-in;
+  transition: top 0.35s ease-in, font-size 0.35s ease-in;
 }
 
 .form__input:hover {
@@ -97,9 +97,6 @@ body {
 }
 #rodo {
   font-size: 1rem;
-}
-
-.error-msg {
 }
 
 .sending-info {

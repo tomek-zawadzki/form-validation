@@ -13,5 +13,7 @@ export const alertFieldBoxes = {
   rodo: document.querySelector(".form-alert-rodo"),
 };
 export const allFormInputs = document.querySelectorAll(".form__input");
-export const allFormAlerts = document.querySelectorAll(".form-alert");
+export const allFormAlerts = Array.from(
+  document.querySelectorAll(".form-alert")
+);
 export const sendBtn = document.querySelector(".submit-btn");

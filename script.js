@@ -35,8 +35,12 @@ allFormInputs.forEach((input, i) => {
     allFormAlerts[i].style.opacity = opacity;
     allFormAlerts[i].style.height = height;
   };
-  input.addEventListener("focus", () => eventHandler("fit-content", "1"));
-  input.addEventListener("blur", () => eventHandler("0", "0"));
+  if (allFormAlerts[i] === allFormAlerts[2]) {
+    input.addEventListener("focus", () => eventHandler("3.8rem", "1"));
+  } else {
+    input.addEventListener("focus", () => eventHandler("2rem", "1"));
+  }
+  input.addEventListener("blur", () => eventHandler("0", "0", "block"));
 });
 
 inputFields.rodo.addEventListener("change", validateRodo);
