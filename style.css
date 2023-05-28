@@ -8,7 +8,6 @@ html {
 }
 
 html {
-  /* font-size: 62.5%; */
   font-family: "Lato", sans-serif;
   background-color: rgb(31, 31, 31);
   color: aliceblue;
@@ -39,6 +38,7 @@ body {
   outline: none;
   padding-left: 1em;
   color: aliceblue;
+  z-index: 1;
 }
 
 .form__label {
@@ -100,6 +100,9 @@ body {
   font-size: 1rem;
 }
 
+.error-msg {
+  z-index: 99;
+}
 .submit-btn {
   width: 90%;
   background-color: #00ffff;
